@@ -1,0 +1,57 @@
+/* Base Styles for Menu */
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  position: relative;
+  padding: 10px 15px;
+  cursor: pointer;
+  background-color: #f9f9f9; /* Default background for menu items */
+  border: 1px solid #ddd; /* Optional border for menu items */
+}
+
+/* Styling for Submenus */
+ul ul {
+  display: none; /* Hide submenus by default */
+  position: absolute;
+  top: 0;
+  left: 100%; /* Position submenu to the right of the parent item */
+  z-index: 1000;
+  background-color: #ffffff; /* Background color for submenus */
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2); /* Optional shadow for submenus */
+}
+
+/* Show Submenu on Hover */
+li:hover > ul {
+  display: block; /* Show the submenu when hovering over the parent item */
+}
+
+/* Styling for Menu Items on Hover */
+li:hover {
+  background-color: #f1f1f1; /* Change background color on hover */
+}
+
+/* Styling for Submenu Items */
+ul ul li {
+  white-space: nowrap; /* Prevent text wrapping */
+}
+
+/* Styling for Deeper Levels (Optional) */
+ul ul ul {
+  left: 100%; /* Position deeper submenu levels to the right of their parent submenu */
+  top: 0;
+}
+
+/* Styling for Icons (Optional) */
+li > span,
+li > div {
+  display: flex;
+  align-items: center;
+}
+
+li > span:hover {
+  color: #007bff; /* Change text color for hover */
+}

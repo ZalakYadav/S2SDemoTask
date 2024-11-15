@@ -1,0 +1,52 @@
+<!-- <div>
+
+  <label for="nestingLevel">Select Nesting Level:</label>
+  <select id="nestingLevel" [(ngModel)]="selectedLevel">
+    <option *ngFor="let level of nestingLevels" [value]="level">
+      {{ level }}
+    </option>
+  </select>
+
+
+  <label for="levelName">Enter Level Name:</label>
+  <input id="levelName" type="text" [(ngModel)]="newLevelName" />
+
+  <button (click)="addNewLevel()">Add Level</button>
+</div>
+
+<div>
+
+  <ul>
+    <ng-container *ngFor="let menu of menuData">
+      <app-dynamic-menu-item
+        [menu]="menu"
+        [selectedLevel]="selectedLevel"
+        [newLevelName]="newLevelName"
+      ></app-dynamic-menu-item>
+    </ng-container>
+  </ul>
+</div>
+
+-->
+
+
+<div>
+  <label for="search">Search Menu:</label>
+  <input id="search" type="text" [(ngModel)]="searchQuery" (input)="filterMenu()" />
+
+  <label for="levelName">Enter Level Name:</label>
+  <input id="levelName" type="text" [(ngModel)]="newLevelName" />
+
+  <label for="parentLevel">Select Parent Level:</label>
+  <select id="parentLevel" [(ngModel)]="selectedParentLevel">
+    <option *ngFor="let level of allMenuLevels" [value]="level">{{ level }}</option>
+  </select>
+
+  <button (click)="addNewLevel()">Add Level</button>
+</div>
+
+<ul>
+  <ng-container *ngFor="let menu of filteredMenu">
+    <app-dynamic-menu-item [menu]="menu"></app-dynamic-menu-item>
+  </ng-container>
+</ul>

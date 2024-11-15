@@ -1,0 +1,25 @@
+<!-- <li>
+    <div>
+      <span *ngIf="menu.content">{{ menu.content }}</span>
+      <span *ngIf="menu.icon">{{ menu.icon }}</span>
+    </div>
+    <ul *ngIf="menu.menu">
+      <ng-container *ngFor="let subMenu of (menu.menu.items || menu.menu)">
+        <app-dynamic-menu-item
+          [menu]="subMenu"
+          [selectedLevel]="selectedLevel"
+          [newLevelName]="newLevelName"
+        ></app-dynamic-menu-item>
+      </ng-container>
+    </ul>
+  </li>
+   -->
+
+   <li>
+    {{ menu.content }}
+    <ul *ngIf="menu.menu && menu.menu.items">
+      <ng-container *ngFor="let subMenu of menu.menu.items">
+        <app-dynamic-menu-item [menu]="subMenu"></app-dynamic-menu-item>
+      </ng-container>
+    </ul>
+  </li>
