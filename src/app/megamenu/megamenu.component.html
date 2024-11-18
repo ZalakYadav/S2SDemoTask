@@ -60,7 +60,7 @@
           >
             <a [routerLink]="item.url">{{ item.label }}</a>
             <!-- Recursive menu rendering -->
-            <ul *ngIf="item.children && item.isOpen" class="submenu">
+            <ul *ngIf="item.children.length != 0 && item.isOpen" class="submenu">
               <ng-container *ngTemplateOutlet="recursiveMenu; context: { $implicit: item.children }"></ng-container>
             </ul>
           </li>
@@ -77,7 +77,7 @@
         (mouseleave)="child.isOpen = false"
       >
         <a [routerLink]="child.url">{{ child.label }}</a>
-        <ul *ngIf="child.children && child.isOpen" class="submenu">
+        <ul *ngIf="child.children?.length > 0 && child.isOpen" class="submenu">
           <ng-container *ngTemplateOutlet="recursiveMenu; context: { $implicit: child.children }"></ng-container>
         </ul>
       </li>
