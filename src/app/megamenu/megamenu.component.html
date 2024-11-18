@@ -1,4 +1,4 @@
-<div class="full-container">
+<!-- <div class="full-container">
   <div class="mega-menu-container">
     <nav class="mega-menu">
       <ul class="menu">
@@ -29,7 +29,10 @@
                     *ngIf="grandChild.children && grandChild.isOpen"
                     class="submenu"
                   >
-                    <li *ngFor="let greatGrandChild of grandChild.children">
+                    <li
+                      *ngFor="let greatGrandChild of grandChild.children"
+                      class="submenu-item"
+                    >
                       <a [routerLink]="greatGrandChild.url">
                         {{ greatGrandChild.label }}
                       </a>
@@ -41,8 +44,46 @@
           </ul>
         </li>
       </ul>
+      
     </nav>
-  </div>
+  </div> -->
+
+  <div class="full-container">
+    <div class="mega-menu-container">
+      <nav class="mega-menu">
+        <ul class="menu">
+          <li
+            *ngFor="let item of filteredMenu"
+            class="menu-item"
+            (mouseenter)="item.isOpen = true"
+            (mouseleave)="item.isOpen = false"
+          >
+            <a [routerLink]="item.url">{{ item.label }}</a>
+            <!-- Recursive menu rendering -->
+            <ul *ngIf="item.children && item.isOpen" class="submenu">
+              <ng-container *ngTemplateOutlet="recursiveMenu; context: { $implicit: item.children }"></ng-container>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  
+    <!-- Recursive Template -->
+    <ng-template #recursiveMenu let-children>
+      <li
+        *ngFor="let child of children"
+        class="submenu-item"
+        (mouseenter)="child.isOpen = true"
+        (mouseleave)="child.isOpen = false"
+      >
+        <a [routerLink]="child.url">{{ child.label }}</a>
+        <ul *ngIf="child.children && child.isOpen" class="submenu">
+          <ng-container *ngTemplateOutlet="recursiveMenu; context: { $implicit: child.children }"></ng-container>
+        </ul>
+      </li>
+    </ng-template>
+
+  
 
   <!-- Configure Navigation -->
   <div class="config-container">
