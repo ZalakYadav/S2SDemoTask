@@ -1,52 +1,76 @@
-<!-- <div>
+<div class="full-container">
+  <div class="mega-menu-container">
+    <nav class="mega-menu">
+      <ul class="menu">
+        <li
+          *ngFor="let item of filteredMenu"
+          class="menu-item"
+          (mouseenter)="item.isOpen = true"
+          (mouseleave)="item.isOpen = false"
+        >
+          <a [routerLink]="item.url">{{ item.label }}</a>
+          <ul *ngIf="item.children && item.isOpen" class="submenu">
+            <li
+              *ngFor="let child of item.children"
+              class="submenu-item"
+              (mouseenter)="child.isOpen = true"
+              (mouseleave)="child.isOpen = false"
+            >
+              <a [routerLink]="child.url">{{ child.label }}</a>
+              <ul *ngIf="child.children && child.isOpen" class="submenu">
+                <li
+                  *ngFor="let grandChild of child.children"
+                  class="submenu-item"
+                  (mouseenter)="grandChild.isOpen = true"
+                  (mouseleave)="grandChild.isOpen = false"
+                >
+                  <a [routerLink]="grandChild.url">{{ grandChild.label }}</a>
+                  <ul
+                    *ngIf="grandChild.children && grandChild.isOpen"
+                    class="submenu"
+                  >
+                    <li *ngFor="let greatGrandChild of grandChild.children">
+                      <a [routerLink]="greatGrandChild.url">
+                        {{ greatGrandChild.label }}
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </div>
 
-  <label for="nestingLevel">Select Nesting Level:</label>
-  <select id="nestingLevel" [(ngModel)]="selectedLevel">
-    <option *ngFor="let level of nestingLevels" [value]="level">
-      {{ level }}
-    </option>
-  </select>
-
-
-  <label for="levelName">Enter Level Name:</label>
-  <input id="levelName" type="text" [(ngModel)]="newLevelName" />
-
-  <button (click)="addNewLevel()">Add Level</button>
+  <!-- Configure Navigation -->
+  <div class="config-container">
+    <section class="navigation-config">
+      <div class="config-wrapper">
+        <h2>Configure Navigation</h2>
+        <p>The mega menu should be configured here.</p>
+        <h3>Add Navigation Entries</h3>
+        <p>Here you can add a new navigation entry.</p>
+        <div class="navigation-form">
+          <label for="parentLevel">Select Parent Level:</label>
+          <select id="parentLevel" [(ngModel)]="selectedParentLevel">
+            <option *ngFor="let level of allMenuLevels" [value]="level">
+              {{ level }}
+            </option>
+          </select>
+          <div *ngIf="selectedParentLevel">
+            <label for="levelName">Enter Level Name:</label>
+            <input
+              id="levelName"
+              type="text"
+              [(ngModel)]="newLevelName"
+              placeholder="Enter new level name"
+            />
+            <button (click)="addNewLevel()">Add</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
 </div>
-
-<div>
-
-  <ul>
-    <ng-container *ngFor="let menu of menuData">
-      <app-dynamic-menu-item
-        [menu]="menu"
-        [selectedLevel]="selectedLevel"
-        [newLevelName]="newLevelName"
-      ></app-dynamic-menu-item>
-    </ng-container>
-  </ul>
-</div>
-
--->
-
-
-<div>
-  <label for="search">Search Menu:</label>
-  <input id="search" type="text" [(ngModel)]="searchQuery" (input)="filterMenu()" />
-
-  <label for="levelName">Enter Level Name:</label>
-  <input id="levelName" type="text" [(ngModel)]="newLevelName" />
-
-  <label for="parentLevel">Select Parent Level:</label>
-  <select id="parentLevel" [(ngModel)]="selectedParentLevel">
-    <option *ngFor="let level of allMenuLevels" [value]="level">{{ level }}</option>
-  </select>
-
-  <button (click)="addNewLevel()">Add Level</button>
-</div>
-
-<ul>
-  <ng-container *ngFor="let menu of filteredMenu">
-    <app-dynamic-menu-item [menu]="menu"></app-dynamic-menu-item>
-  </ng-container>
-</ul>
