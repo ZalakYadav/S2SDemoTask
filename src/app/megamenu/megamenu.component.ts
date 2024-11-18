@@ -205,42 +205,16 @@ export class MegamenuComponent {
       label: this.newLevelName,
       url: `/${this.newLevelName.toLowerCase().replace(/\s+/g, '-')}`,
       children: [],
-      isOpen: false, // Add default value for isOpen
+      isOpen: false, 
     });
   
     this.newLevelName = '';
     this.selectedParentLevel = '';
     this.updateAllMenuLevels();
   
-    // Force change detection
-    this.menuData = [...this.menuData]; // Create a new instance of the array
-    this.filteredMenu = [...this.menuData]; // Reassign filteredMenu
+    this.menuData = [...this.menuData]; 
+    this.filteredMenu = [...this.menuData]; 
     console.log('filter data',this.filteredMenu)
     this.saveMenuData();
-
   }
-  // addNewLevel() {
-  //   debugger
-  //   if (!this.newLevelName || !this.selectedParentLevel) return;
-
-  //   const parentPath = this.selectedParentLevel.split(' > ');
-  //   let parent: MenuItem[] = this.menuData;
-
-  //   for (const level of parentPath) {
-  //     const foundItem = parent.find((item) => item.label === level);
-  //     if (!foundItem) return;
-  //     parent = foundItem.children;
-  //   }
-
-  //   parent.push({
-  //     label: this.newLevelName,
-  //     url: `/${this.newLevelName.toLowerCase().replace(/\s+/g, '-')}`,
-  //     children: [],
-  //   });
-
-  //   this.newLevelName = '';
-  //   this.selectedParentLevel = '';
-  //   this.updateAllMenuLevels();
-  //   this.saveMenuData();
-  // }
 }
