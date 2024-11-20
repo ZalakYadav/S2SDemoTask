@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MenuItem } from '../models/megamenu.model';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-megamenu',
@@ -15,11 +16,11 @@ export class MegamenuComponent {
   filteredMenu: MenuItem[] = [];
   allMenuLevels: string[] = [];
 
-  constructor() {
+  constructor(private snackBar: MatSnackBar) {
     this.loadMenuData();
     this.updateAllMenuLevels();
   }
-
+  
   loadMenuData() {
     if (typeof window !== 'undefined') {
       const savedMenu = localStorage.getItem('menuData');
@@ -191,6 +192,10 @@ export class MegamenuComponent {
 
   addNewLevel() {
     if (!this.newLevelName || !this.selectedParentLevel) return;
+
+    this.snackBar.open(`New level "${this.newLevelName}" added under "${this.selectedParentLevel}".`, 'Close', {
+      duration: 3000,
+    });
 
     const parentPath = this.selectedParentLevel.split(' > ');
     let parent: MenuItem[] = this.menuData;

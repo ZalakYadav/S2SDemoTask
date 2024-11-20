@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MegaMenuModule } from 'primeng/megamenu';
@@ -24,7 +23,7 @@ import {MatButtonModule} from '@angular/material/button';
   ],
   providers: [
     provideClientHydration(),
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
   ],
   exports: [MegamenuComponent],
   bootstrap: [AppComponent]
