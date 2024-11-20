@@ -1,38 +1,31 @@
 <div class="full-container">
-    <div class="mega-menu-container">
-      <nav class="mega-menu">
-        <ul class="menu">
-          <li
-            *ngFor="let item of filteredMenu"
-            class="menu-item"
-            (mouseenter)="item.isOpen = true"
-            (mouseleave)="item.isOpen = false"
-          >
-            <a [routerLink]="item.url">{{ item.label }}</a>
-            <!-- Recursive menu rendering -->
-            <ul *ngIf="item.children.length != 0 && item.isOpen" class="submenu">
-              <ng-container *ngTemplateOutlet="recursiveMenu; context: { $implicit: item.children }"></ng-container>
-            </ul>
-          </li>
-        </ul>
-      </nav>
-    </div>
-  
-    <!-- Recursive Template -->
-    <ng-template #recursiveMenu let-children>
-      <li
-        *ngFor="let child of children"
-        class="submenu-item"
-        (mouseenter)="child.isOpen = true"
-        (mouseleave)="child.isOpen = false"
-      >
-        <a [routerLink]="child.url">{{ child.label }}</a>
-        <ul *ngIf="child.children?.length > 0 && child.isOpen" class="submenu">
-          <ng-container *ngTemplateOutlet="recursiveMenu; context: { $implicit: child.children }"></ng-container>
-        </ul>
-      </li>
-    </ng-template>
-  
+  <div class="mega-menu-container">
+    <nav class="mega-menu">
+      <ul class="menu">
+        <li class="menu-item"><mat-icon>menu</mat-icon></li>
+        <li *ngFor="let item of filteredMenu" class="menu-item" (mouseenter)="item.isOpen = true"
+          (mouseleave)="item.isOpen = false">
+          <a [routerLink]="item.url">{{ item.label }}</a>
+          <!-- Recursive menu rendering -->
+          <ul *ngIf="item.children.length > 0 && item.isOpen" class="submenu">
+            <ng-container *ngTemplateOutlet="recursiveMenu; context: { $implicit: item.children }"></ng-container>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+  <!-- Recursive Template -->
+  <ng-template #recursiveMenu let-children>
+    <li *ngFor="let child of children" class="submenu-item" (mouseenter)="child.isOpen = true"
+      (mouseleave)="child.isOpen = false">
+      <a [routerLink]="child.url">{{ child.label }}</a>
+      <ul *ngIf="child.children?.length > 0 && child.isOpen" class="submenu">
+        <ng-container *ngTemplateOutlet="recursiveMenu; context: { $implicit: child.children }"></ng-container>
+      </ul>
+    </li>
+  </ng-template>
+
   <!-- Configure Navigation -->
   <div class="config-container">
     <section class="navigation-config">
@@ -42,21 +35,18 @@
         <h3>Add Navigation Entries</h3>
         <p>Here you can add a new navigation entry.</p>
         <div class="navigation-form">
-          <label for="parentLevel">Select Parent Level:</label>
-          <select id="parentLevel" [(ngModel)]="selectedParentLevel">
-            <option *ngFor="let level of allMenuLevels" [value]="level">
-              {{ level }}
-            </option>
-          </select>
-          <div *ngIf="selectedParentLevel">
-            <label for="levelName">Enter Level Name:</label>
-            <input
-              id="levelName"
-              type="text"
-              [(ngModel)]="newLevelName"
-              placeholder="Enter new level name"
-            />
-            <button (click)="addNewLevel()">Add</button>
+          <div class="form-horizontal">
+            <button (click)="addNewLevel()" [disabled]="!selectedParentLevel"
+              [style.backgroundColor]="!selectedParentLevel ? '#dfdee2' : '#6264a7'"
+              [style.color]="!selectedParentLevel ? '#97969b' : '#fff'" mat-raised-button disabled>+ Add Entry</button>
+            <select id="parentLevel" [(ngModel)]="selectedParentLevel">
+              <option value="" disabled selected>Search for navigation entry</option>
+              <option *ngFor="let level of allMenuLevels" [value]="level">
+                {{ level }}
+              </option>
+            </select>
+            <input id="levelName" type="text" [(ngModel)]="newLevelName" placeholder="Enter new level name"
+              [disabled]="!selectedParentLevel" />
           </div>
         </div>
       </div>

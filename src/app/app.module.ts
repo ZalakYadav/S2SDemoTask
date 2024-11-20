@@ -7,7 +7,8 @@ import { MegaMenuModule } from 'primeng/megamenu';
 import { MegamenuComponent } from './megamenu/megamenu.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { FormsModule } from '@angular/forms';
-
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button'; 
 @NgModule({
   declarations: [
     AppComponent,
@@ -17,7 +18,9 @@ import { FormsModule } from '@angular/forms';
     BrowserModule,
     AppRoutingModule,
     MegaMenuModule,
-    FormsModule
+    FormsModule,
+    MatIconModule,
+    MatButtonModule
   ],
   providers: [
     provideClientHydration(),

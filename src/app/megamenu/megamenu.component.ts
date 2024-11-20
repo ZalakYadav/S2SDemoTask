@@ -1,4 +1,4 @@
-import { Component} from '@angular/core';
+import { Component } from '@angular/core';
 import { MenuItem } from '../models/megamenu.model';
 
 @Component({
@@ -28,7 +28,7 @@ export class MegamenuComponent {
       } else {
         this.menuData = [
           {
-            label: 'Menu 1',
+            label: 'MenuItem-1',
             url: '/menu1',
             children: [
               {
@@ -61,7 +61,7 @@ export class MegamenuComponent {
             ],
           },
           {
-            label: 'Menu 2',
+            label: 'MenuItem-2',
             url: '/menu2',
             children: [
               {
@@ -83,7 +83,7 @@ export class MegamenuComponent {
             ],
           },
           {
-            label: 'Menu 3',
+            label: 'MenuItem-3',
             url: '/menu3',
             children: [
               {
@@ -105,7 +105,7 @@ export class MegamenuComponent {
             ],
           },
           {
-            label: 'Menu 4',
+            label: 'MenuItem-4',
             url: '/menu4',
             children: [
               {
@@ -127,7 +127,7 @@ export class MegamenuComponent {
             ],
           },
           {
-            label: 'Menu 5',
+            label: 'MenuItem-5',
             url: '/menu5',
             children: [
               {
@@ -191,30 +191,37 @@ export class MegamenuComponent {
 
   addNewLevel() {
     if (!this.newLevelName || !this.selectedParentLevel) return;
-  
+
     const parentPath = this.selectedParentLevel.split(' > ');
     let parent: MenuItem[] = this.menuData;
-  
+
     for (const level of parentPath) {
       const foundItem = parent.find((item) => item.label === level);
       if (!foundItem) return;
       parent = foundItem.children;
     }
-  
+
     parent.push({
       label: this.newLevelName,
       url: `/${this.newLevelName.toLowerCase().replace(/\s+/g, '-')}`,
       children: [],
-      isOpen: false, 
+      isOpen: false,
     });
-  
+
     this.newLevelName = '';
     this.selectedParentLevel = '';
     this.updateAllMenuLevels();
-  
-    this.menuData = [...this.menuData]; 
-    this.filteredMenu = [...this.menuData]; 
-    console.log('filter data',this.filteredMenu)
+
+    this.menuData = [...this.menuData];
+    this.filteredMenu = [...this.menuData];
+    console.log('filter data', this.filteredMenu)
     this.saveMenuData();
+  }
+
+  showHamburgerIcon = true;
+
+  onHamburgerClick() {
+    console.log('Hamburger menu clicked');
+    // Add logic to open/close a side menu
   }
 }
