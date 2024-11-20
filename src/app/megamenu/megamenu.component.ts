@@ -217,11 +217,4 @@ export class MegamenuComponent {
     console.log('filter data', this.filteredMenu)
     this.saveMenuData();
   }
-
-  showHamburgerIcon = true;
-
-  onHamburgerClick() {
-    console.log('Hamburger menu clicked');
-    // Add logic to open/close a side menu
-  }
 }
